@@ -1,0 +1,27 @@
+{
+  "development": {
+    "username": "root",
+    "password": "rootroot",
+    "database": "job_forum",
+    "host": "127.0.0.1",
+    "dialect": "mysql",
+    "operatorsAliases": "Sequelize.Op"
+  },
+  "test": {
+    "username": "root",
+    "password": "rootroot",
+    "database": "job_forum",
+    "host": "127.0.0.1",
+    "dialect": "mysql",
+    "operatorsAliases": "Sequelize.Op"
+  },
+  "production": {
+    "username": "root",
+    "password": "rootroot",
+    "database": "job_forum",
+    "host": "127.0.0.1",
+    "dialect": "mysql",
+    "operatorsAliases": "Sequelize.Op"
+  }
+}
+
