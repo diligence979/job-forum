@@ -4,7 +4,6 @@ const Service = require('egg').Service;
 const {
   ERROR,
   SUCCESS,
-  unique,
 } = require('../util/util');
 
 class PostService extends Service {
@@ -64,6 +63,25 @@ class PostService extends Service {
       });
     }
     post.destroy();
+    return SUCCESS;
+  }
+
+  async update({
+    id,
+    user_id,
+    updates,
+  }) {
+    const post = await this.ctx.model.Post.findById(id);
+    if (!post) {
+      return Object.assign(ERROR, {
+        msg: 'post not found',
+      });
+    } else if (post.user_id.toString() !== user_id) {
+      return Object.assign(ERROR, {
+        msg: 'not allowed to modify others post',
+      });
+    }
+    post.update(updates);
     return SUCCESS;
   }
 }

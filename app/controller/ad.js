@@ -1,15 +1,14 @@
 'use strict';
 
 const Controller = require('egg').Controller;
-class PostController extends Controller {
+class AdController extends Controller {
   async create() {
     const {
       ctx,
     } = this;
-    const created = await ctx.service.post.create(ctx.request.body);
+    const created = await ctx.service.ad.create(ctx.request.body);
     ctx.status = 201;
     ctx.body = created;
-
   }
 
   async find() {
@@ -17,7 +16,7 @@ class PostController extends Controller {
       ctx,
     } = this;
     const id = ctx.params.id;
-    ctx.body = await ctx.service.post.find(id);
+    ctx.body = await ctx.service.ad.find(id);
   }
 
   async edit() {
@@ -25,7 +24,7 @@ class PostController extends Controller {
       ctx,
     } = this;
     const id = ctx.params.id;
-    ctx.body = await ctx.service.post.find(id);
+    ctx.body = await ctx.service.ad.find(id);
   }
 
   async destroy() {
@@ -33,10 +32,10 @@ class PostController extends Controller {
       ctx,
     } = this;
     const id = ctx.params.id;
-    const user_id = ctx.params.user_id;
-    const res = await ctx.service.post.del({
+    const hr_id = ctx.params.hr_id;
+    const res = await ctx.service.ad.del({
       id,
-      user_id,
+      hr_id,
     });
     ctx.status = 200;
     ctx.body = res;
@@ -47,14 +46,14 @@ class PostController extends Controller {
       ctx,
     } = this;
     const id = ctx.params.id;
-    const user_id = ctx.params.user_id;
+    const hr_id = ctx.params.hr_id;
     const body = ctx.request.body;
-    ctx.body = await ctx.service.post.update({
+    ctx.body = await ctx.service.ad.update({
       id,
-      user_id,
+      hr_id,
       updates: body,
     });
   }
 }
 
-module.exports = PostController;
+module.exports = AdController;

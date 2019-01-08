@@ -7,5 +7,5 @@ module.exports = app => {
   router.get('/api/post/:id', 'post.find');
   router.get('/api/post/:id/edit', 'post.edit');
   router.delete('/api/users/:user_id/post/:id', 'post.destroy');
-  // router.put('/api/users/:user_id/post/:id', 'post.update');
+  router.put('/api/users/:user_id/post/:id', 'post.update');
 };
