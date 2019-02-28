@@ -2,7 +2,7 @@
 
 module.exports = app => {
   const { router } = app;
-  // router.get('/api/post', 'post.index');
+  router.get('/api/post', 'post.index');
   router.post('/api/post', 'post.create');
   router.get('/api/post/:id', 'post.find');
   router.get('/api/post/:id/edit', 'post.edit');

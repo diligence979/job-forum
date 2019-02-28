@@ -7,6 +7,35 @@ const {
 } = require('../util/util');
 
 class PostService extends Service {
+  async index({
+    offset = 0,
+    limit = 30,
+    order_by = 'created_at',
+    order = 'DESC'
+  }) {
+    const options = {
+      offset: parseInt(offset),
+      limit: parseInt(limit),
+      order: [
+        [ order_by, order.toUpperCase() ],
+      ],
+    };
+    const res = await this.ctx.model.Post.findAndCountAll(Object.assign(options, {
+      include: [{
+        model: this.ctx.model.User,
+        as: 'user',
+        attributes: [ 'id', 'username' ],
+      },{
+        model: this.ctx.model.Comment,
+        as: 'comment',
+        attributes: ['content', 'created_at']
+      }],
+    }));
+    return Object.assign(SUCCESS, {
+      data: res,
+    });
+  }
+
   async create(post) {
     const {
       ctx,

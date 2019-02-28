@@ -2,6 +2,14 @@
 
 const Controller = require('egg').Controller;
 class AdController extends Controller {
+  async index() {
+    const {
+      ctx,
+    } = this;
+    const res = await ctx.service.ad.index(ctx.query);
+    ctx.body = res;
+  }
+
   async create() {
     const {
       ctx,
