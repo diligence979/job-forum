@@ -1,6 +1,8 @@
 'use strict';
 
 module.exports = app => {
-  app.post('/api/users/comment', 'comment.create');
-  app.delete('/api/users/:user_id/comment/:id', 'comment.destroy');
+  const { router } = app;
+  router.get('/api/users/comment', 'comment.index');
+  router.post('/api/users/comment', 'comment.create');
+  router.delete('/api/users/:user_id/comment/:id', 'comment.destroy');
 };

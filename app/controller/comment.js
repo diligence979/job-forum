@@ -3,6 +3,15 @@
 const Controller = require('egg').Controller;
 
 class CommentController extends Controller {
+  async index() {
+    const {
+      ctx,
+    } = this;
+    console.log(ctx.query)
+    const res = await ctx.service.comment.index(ctx.query);
+    ctx.body = res;
+  }
+
   async create() {
     const {
       ctx,

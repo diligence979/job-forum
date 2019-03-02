@@ -5,7 +5,48 @@ const {
   ERROR,
   SUCCESS,
 } = require('../util/util');
+
 class CommentService extends Service {
+  async index({
+    offset = 0,
+    limit = 10,
+    order_by = 'created_at',
+    order = 'DESC',
+    post_id = null,
+    ad_id = null
+  }) {
+    let options = {
+      offset: parseInt(offset),
+      limit: parseInt(limit),
+      order: [
+        [ order_by, order.toUpperCase() ],
+      ],
+    };
+    if (post_id) {
+      options = Object.assign(options, {
+        where: {
+          post_id: post_id
+        }
+      })
+    } else if (ad_id) {
+      options = Object.assign(options, {
+        where: {
+          ad_id: ad_id
+        }
+      })
+    }
+    const res = await this.ctx.model.Comment.findAndCountAll(Object.assign(options, {
+      include: [{
+        model: this.ctx.model.User,
+        as: 'user',
+        attributes: [ 'id', 'username' ],
+      }],
+    }));
+    return Object.assign(SUCCESS, {
+      data: res,
+    });
+  }
+
   async create({
     post_id = null,
     ad_id = null,
