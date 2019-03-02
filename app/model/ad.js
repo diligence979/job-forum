@@ -14,6 +14,10 @@ module.exports = app => {
     email: STRING(255),
     jd: TEXT,
     other: TEXT,
+    comment_size: {
+      type: INTEGER,
+      defaultValue: 0,
+    },
     created_at: DATE,
     updated_at: DATE,
   });

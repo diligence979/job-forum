@@ -25,10 +25,6 @@ class AdService extends Service {
         model: this.ctx.model.Hr,
         as: 'hr',
         attributes: [ 'id', 'username' ],
-      },{
-        model: this.ctx.model.Comment,
-        as: 'comment',
-        attributes: ['content', 'created_at']
       }],
     }));
     return Object.assign(SUCCESS, {

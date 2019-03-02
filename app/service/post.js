@@ -25,10 +25,6 @@ class PostService extends Service {
         model: this.ctx.model.User,
         as: 'user',
         attributes: [ 'id', 'username' ],
-      },{
-        model: this.ctx.model.Comment,
-        as: 'comment',
-        attributes: ['content', 'created_at']
       }],
     }));
     return Object.assign(SUCCESS, {

@@ -7,6 +7,10 @@ module.exports = app => {
     id: { type: INTEGER, primaryKey: true, autoIncrement: true },
     title: STRING(255),
     content: TEXT,
+    comment_size: {
+      type: INTEGER,
+      defaultValue: 0,
+    },
     created_at: DATE,
     updated_at: DATE,
   });

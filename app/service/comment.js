@@ -34,10 +34,20 @@ class CommentService extends Service {
         content,
       });
       ctx.status = 201;
+      if (post_id) {
+        const post = await ctx.model.Post.findById(post_id);
+        post.increment('comment_size').then().catch(err => {
+          console.log(err);
+        });
+      } else if (ad_id) {
+        const ad = await ctx.model.Ad.findById(ad_id);
+        ad.increment('comment_size').then().catch(err => {
+          console.log(err);
+        });
+      }
       return Object.assign(SUCCESS, {
         data: res,
       });
-
     } catch (error) {
       ctx.status = 500;
       throw (error);
@@ -53,20 +63,30 @@ class CommentService extends Service {
     } = this;
     try {
       const comment = await ctx.model.Comment.findById(id);
-      const user = await ctx.model.User.findById(user_id);
       if (!comment) {
         ctx.status = 400;
         return Object.assign(ERROR, {
           msg: 'comment is not exists',
         });
       }
-      if (comment.user_id !== user_id) {
+      if (comment.user_id !== parseInt(user_id)) {
         ctx.status = 403;
         return Object.assign(ERROR, {
           msg: 'you can not delete others comment',
         });
       }
+      const post = await ctx.model.Post.findById(comment.post_id);
+      const ad = await ctx.model.Ad.findById(comment.ad_id);
       const res = await comment.destroy();
+      if (post) {
+        post.decrement('comment_size').then().catch(err => {
+          console.log(err);
+        });
+      } else if (ad) {
+        ad.decrement('comment_size').then().catch(err => {
+          console.log(err);
+        });
+      }
       ctx.status = 200;
       return Object.assign(SUCCESS, {
         data: res,
