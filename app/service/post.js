@@ -53,16 +53,44 @@ class PostService extends Service {
         model: this.ctx.model.User,
         as: 'user',
         attributes: [ 'id', 'username' ],
-      }, {
-        model: this.ctx.model.Comment,
-        as: 'comment',
-        attributes: [ 'id', 'content', 'created_at', 'updated_at' ],
-        include: [{
-          model: this.ctx.model.User,
-          attributes: [ 'username' ],
-        }],
       }],
     });
+    if (!post) {
+      return Object.assign(ERROR, {
+        msg: 'post not found',
+      });
+    }
+    return Object.assign(SUCCESS, {
+      data: post,
+    });
+  }
+
+  async findByUser(userId, {
+    offset = 0,
+    limit = 30,
+    order_by = 'created_at',
+    order = 'DESC'
+  }) {
+    const options = {
+      offset: parseInt(offset),
+      limit: parseInt(limit),
+      order: [
+        [ order_by, order.toUpperCase() ],
+      ],
+    };
+
+    if (userId) {
+      options.where = {
+        user_id: userId
+      };
+    }
+    const post = await this.ctx.model.Post.findAndCountAll(Object.assign(options, {
+      include: [{
+        model: this.ctx.model.User,
+        as: 'user',
+        attributes: [ 'id', 'username' ],
+      }],
+    }));
     if (!post) {
       return Object.assign(ERROR, {
         msg: 'post not found',

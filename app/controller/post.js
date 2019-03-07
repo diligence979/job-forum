@@ -28,6 +28,14 @@ class PostController extends Controller {
     ctx.body = await ctx.service.post.find(id);
   }
 
+  async findByUser() {
+    const {
+      ctx,
+    } = this;
+    const userId = ctx.params.id;
+    ctx.body = await ctx.service.post.findByUser(userId, ctx.query)
+  }
+
   async edit() {
     const {
       ctx,

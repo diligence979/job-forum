@@ -27,6 +27,14 @@ class AdController extends Controller {
     ctx.body = await ctx.service.ad.find(id);
   }
 
+  async findByHr() {
+    const {
+      ctx,
+    } = this;
+    const hrId = ctx.params.id;
+    ctx.body = await ctx.service.ad.findByHr(hrId, ctx.query)
+  }
+
   async edit() {
     const {
       ctx,
