@@ -15,6 +15,9 @@ module.exports = app => {
     app.model.Hr.hasMany(app.model.Ad, {
       as: 'ad',
     });
+    app.model.Hr.hasMany(app.model.Comment, {
+      as: 'comment',
+    });
   };
 
   return Hr;

@@ -50,20 +50,22 @@ class CommentService extends Service {
   async create({
     post_id = null,
     ad_id = null,
-    user_id,
+    user_id = null,
+    hr_id = null,
     content,
   }) {
     const {
       ctx,
     } = this;
     try {
-      if (!content || !user_id || (!post_id && !ad_id)) {
+      if (!content || (!user_id && !hr_id) || (!post_id && !ad_id)) {
         ctx.status = 400;
         return Object.assign(ERROR, {
           msg: `expected an object with content, user_id, post_id or ad_id but got: ${JSON.stringify({
             post_id,
             ad_id,
             user_id,
+            hr_id,
             content,
           })}`,
         });
@@ -72,9 +74,11 @@ class CommentService extends Service {
         post_id,
         ad_id,
         user_id,
+        hr_id,
         content,
       });
       ctx.status = 201;
+
       if (post_id) {
         const post = await ctx.model.Post.findById(post_id);
         post.increment('comment_size').then().catch(err => {
@@ -86,6 +90,7 @@ class CommentService extends Service {
           console.log(err);
         });
       }
+
       return Object.assign(SUCCESS, {
         data: res,
       });

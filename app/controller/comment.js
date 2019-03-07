@@ -7,7 +7,6 @@ class CommentController extends Controller {
     const {
       ctx,
     } = this;
-    console.log(ctx.query)
     const res = await ctx.service.comment.index(ctx.query);
     ctx.body = res;
   }
@@ -19,13 +18,15 @@ class CommentController extends Controller {
     const {
       post_id = null,
       ad_id = null,
-      user_id,
+      user_id = null,
+      hr_id = null,
       content,
     } = ctx.request.body;
     ctx.body = await ctx.service.comment.create({
       post_id,
       ad_id,
       user_id,
+      hr_id,
       content,
     });
   }

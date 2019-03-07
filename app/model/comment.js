@@ -13,6 +13,7 @@ module.exports = app => {
   Comment.associate = () => {
     app.model.Comment.belongsTo(app.model.Post);
     app.model.Comment.belongsTo(app.model.User);
+    app.model.Comment.belongsTo(app.model.Hr);
     app.model.Comment.belongsTo(app.model.Ad);
   };
 
