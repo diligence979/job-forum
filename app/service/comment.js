@@ -13,7 +13,7 @@ class CommentService extends Service {
     order_by = 'created_at',
     order = 'DESC',
     post_id = null,
-    ad_id = null
+    ad_id = null,
   }) {
     let options = {
       offset: parseInt(offset),
@@ -39,6 +39,10 @@ class CommentService extends Service {
       include: [{
         model: this.ctx.model.User,
         as: 'user',
+        attributes: [ 'id', 'username' ],
+      }, {
+        model: this.ctx.model.Hr,
+        as: 'hr',
         attributes: [ 'id', 'username' ],
       }],
     }));
