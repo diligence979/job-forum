@@ -71,6 +71,13 @@ class PostController extends Controller {
       updates: body,
     });
   }
+
+  async hot() {
+    const {
+      ctx,
+    } = this;    
+    ctx.body = await ctx.service.post.hot(ctx.query);
+  }
 }
 
 module.exports = PostController;

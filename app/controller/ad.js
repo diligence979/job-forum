@@ -70,6 +70,13 @@ class AdController extends Controller {
       updates: body,
     });
   }
+
+  async hot() {
+    const {
+      ctx,
+    } = this;    
+    ctx.body = await ctx.service.ad.hot(ctx.query);
+  }
 }
 
 module.exports = AdController;

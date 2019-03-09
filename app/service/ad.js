@@ -84,20 +84,20 @@ class AdService extends Service {
         hr_id: hrId
       };
     }
-    const post = await this.ctx.model.Ad.findAndCountAll(Object.assign(options, {
+    const ad = await this.ctx.model.Ad.findAndCountAll(Object.assign(options, {
       include: [{
         model: this.ctx.model.Hr,
         as: 'hr',
         attributes: [ 'id', 'username' ],
       }],
     }));
-    if (!post) {
+    if (!ad) {
       return Object.assign(ERROR, {
-        msg: 'post not found',
+        msg: 'ad not found',
       });
     }
     return Object.assign(SUCCESS, {
-      data: post,
+      data: ad,
     });
   }
 
@@ -136,6 +136,31 @@ class AdService extends Service {
     }
     ad.update(updates);
     return SUCCESS;
+  }
+
+  async hot({
+    offset = 0,
+    limit = 5,
+    order_by = 'comment_size',
+    order = 'DESC'
+  }) {
+    const options = {
+      offset: parseInt(offset),
+      limit: parseInt(limit),
+      order: [
+        [ order_by, order.toUpperCase() ],
+      ],
+    };
+    const res = await this.ctx.model.Ad.findAndCountAll(Object.assign(options, {
+      include: [{
+        model: this.ctx.model.Hr,
+        as: 'hr',
+        attributes: [ 'id', 'username' ],
+      }],
+    }));
+    return Object.assign(SUCCESS, {
+      data: res,
+    });
   }
 }
 

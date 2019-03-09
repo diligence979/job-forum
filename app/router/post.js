@@ -9,4 +9,5 @@ module.exports = app => {
   router.get('/api/post/:id/edit', 'post.edit');
   router.delete('/api/users/:user_id/post/:id', 'post.destroy');
   router.put('/api/users/:user_id/post/:id', 'post.update');
+  router.get('/api/comment/post', 'post.hot');
 };

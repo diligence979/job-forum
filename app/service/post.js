@@ -137,6 +137,31 @@ class PostService extends Service {
     post.update(updates);
     return SUCCESS;
   }
+
+  async hot({
+    offset = 0,
+    limit = 5,
+    order_by = 'comment_size',
+    order = 'DESC'
+  }) {
+    const options = {
+      offset: parseInt(offset),
+      limit: parseInt(limit),
+      order: [
+        [ order_by, order.toUpperCase() ],
+      ],
+    };
+    const res = await this.ctx.model.Post.findAndCountAll(Object.assign(options, {
+      include: [{
+        model: this.ctx.model.User,
+        as: 'user',
+        attributes: [ 'id', 'username' ],
+      }],
+    }));
+    return Object.assign(SUCCESS, {
+      data: res,
+    });
+  }
 }
 
 module.exports = PostService;
