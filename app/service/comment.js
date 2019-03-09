@@ -104,7 +104,7 @@ class CommentService extends Service {
     }
   }
 
-  async del({
+  async userDel({
     id,
     user_id,
   }) {
@@ -120,6 +120,50 @@ class CommentService extends Service {
         });
       }
       if (comment.user_id !== parseInt(user_id)) {
+        ctx.status = 403;
+        return Object.assign(ERROR, {
+          msg: 'you can not delete others comment',
+        });
+      }
+      const post = await ctx.model.Post.findById(comment.post_id);
+      const ad = await ctx.model.Ad.findById(comment.ad_id);
+      const res = await comment.destroy();
+      if (post) {
+        post.decrement('comment_size').then().catch(err => {
+          console.log(err);
+        });
+      } else if (ad) {
+        ad.decrement('comment_size').then().catch(err => {
+          console.log(err);
+        });
+      }
+      ctx.status = 200;
+      return Object.assign(SUCCESS, {
+        data: res,
+      });
+
+    } catch (error) {
+      ctx.status = 500;
+      throw (error);
+    }
+  }
+
+  async hrDel({
+    id,
+    hr_id,
+  }) {
+    const {
+      ctx,
+    } = this;
+    try {
+      const comment = await ctx.model.Comment.findById(id);
+      if (!comment) {
+        ctx.status = 400;
+        return Object.assign(ERROR, {
+          msg: 'comment is not exists',
+        });
+      }
+      if (comment.hr_id !== parseInt(hr_id)) {
         ctx.status = 403;
         return Object.assign(ERROR, {
           msg: 'you can not delete others comment',

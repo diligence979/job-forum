@@ -31,15 +31,27 @@ class CommentController extends Controller {
     });
   }
 
-  async destroy() {
+  async userDestroy() {
     const {
       ctx,
     } = this;
     const id = ctx.params.id;
     const user_id = ctx.params.user_id;
-    ctx.body = await ctx.service.comment.del({
+    ctx.body = await ctx.service.comment.userDel({
       id,
       user_id,
+    });
+  }
+
+  async hrDestory() {
+    const {
+      ctx,
+    } = this;
+    const id = ctx.params.id;
+    const hr_id = ctx.params.hr_id;
+    ctx.body = await ctx.service.comment.hrDel({
+      id,
+      hr_id
     });
   }
 }
