@@ -24,7 +24,7 @@ class AdService extends Service {
       include: [{
         model: this.ctx.model.Hr,
         as: 'hr',
-        attributes: [ 'id', 'username' ],
+        attributes: [ 'id', 'username', 'avatar' ],
       }],
     }));
     return Object.assign(SUCCESS, {
@@ -155,7 +155,7 @@ class AdService extends Service {
       include: [{
         model: this.ctx.model.Hr,
         as: 'hr',
-        attributes: [ 'id', 'username' ],
+        attributes: [ 'id', 'username', 'avatar' ],
       }],
     }));
     return Object.assign(SUCCESS, {

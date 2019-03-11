@@ -8,4 +8,5 @@ module.exports = app => {
   router.post('/api/hr/login', 'hr.login');
   router.get('/api/hr/:id', 'hr.find');
   router.get('/api/hr/:id/edit', 'hr.find');
+  router.post('/api/hr/avatar', 'hr.avatar')
 };

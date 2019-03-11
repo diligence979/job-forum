@@ -155,6 +155,27 @@ class UserService extends Service {
       throw (500);
     }
   }
+
+  async avatar({id, avatar}) {
+    const { ctx } = this;
+    try {
+      const userDB = await ctx.model.User.findById(id);
+      if (!userDB) {
+        ctx.status = 400;
+        return Object.assign(ERROR, {
+          msg: 'user not found',
+        });
+      }
+      const res = await userDB.update({avatar});
+      ctx.status = 200;
+      return Object.assign(SUCCESS, {
+        data: res,
+      });
+
+    } catch (error) {
+      ctx.throw(500);
+    }
+  }
 }
 
 module.exports = UserService;

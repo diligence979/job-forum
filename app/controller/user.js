@@ -49,6 +49,12 @@ class UserController extends Controller {
     const id = toInt(ctx.params.id);
     ctx.body = await ctx.service.user.find(id);
   }
+
+  async avatar() {
+    const { ctx } = this;
+    ctx.status = 201;
+    ctx.body = await ctx.service.user.avatar(ctx.request.body);
+  }
 }
 
 module.exports = UserController;

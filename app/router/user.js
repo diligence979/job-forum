@@ -8,4 +8,5 @@ module.exports = app => {
   router.post('/api/user/login', 'user.login');
   router.get('/api/user/:id', 'user.find');
   router.get('/api/user/:id/edit', 'user.find');
+  router.post('/api/user/avatar', 'user.avatar');
 };

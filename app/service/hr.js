@@ -155,6 +155,27 @@ class HrService extends Service {
       throw (500);
     }
   }
+
+  async avatar({id, avatar}) {
+    const { ctx } = this;
+    try {
+      const hrDB = await ctx.model.Hr.findById(id);
+      if (!hrDB) {
+        ctx.status = 400;
+        return Object.assign(ERROR, {
+          msg: 'hr not found',
+        });
+      }
+      const res = await hrDB.update({avatar});
+      ctx.status = 200;
+      return Object.assign(SUCCESS, {
+        data: res,
+      });
+
+    } catch (error) {
+      ctx.throw(500);
+    }
+  }
 }
 
 module.exports = HrService;

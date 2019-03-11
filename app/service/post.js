@@ -24,7 +24,7 @@ class PostService extends Service {
       include: [{
         model: this.ctx.model.User,
         as: 'user',
-        attributes: [ 'id', 'username' ],
+        attributes: [ 'id', 'username', 'avatar' ],
       }],
     }));
     return Object.assign(SUCCESS, {
@@ -155,7 +155,7 @@ class PostService extends Service {
       include: [{
         model: this.ctx.model.User,
         as: 'user',
-        attributes: [ 'id', 'username' ],
+        attributes: [ 'id', 'username', 'avatar' ],
       }],
     }));
     return Object.assign(SUCCESS, {

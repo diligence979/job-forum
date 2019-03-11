@@ -49,6 +49,12 @@ class HrController extends Controller {
     const id = toInt(ctx.params.id);
     ctx.body = await ctx.service.hr.find(id);
   }
+
+  async avatar() {
+    const { ctx } = this;
+    ctx.status = 201;
+    ctx.body = await ctx.service.hr.avatar(ctx.request.body);
+  }
 }
 
 module.exports = HrController;
