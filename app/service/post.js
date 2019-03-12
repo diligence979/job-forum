@@ -88,7 +88,7 @@ class PostService extends Service {
       include: [{
         model: this.ctx.model.User,
         as: 'user',
-        attributes: [ 'id', 'username' ],
+        attributes: [ 'id', 'username', 'avatar' ],
       }],
     }));
     if (!post) {

@@ -39,11 +39,11 @@ class CommentService extends Service {
       include: [{
         model: this.ctx.model.User,
         as: 'user',
-        attributes: [ 'id', 'username' ],
+        attributes: [ 'id', 'username', 'avatar' ],
       }, {
         model: this.ctx.model.Hr,
         as: 'hr',
-        attributes: [ 'id', 'username' ],
+        attributes: [ 'id', 'username', 'avatar' ],
       }],
     }));
     return Object.assign(SUCCESS, {

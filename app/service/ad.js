@@ -52,7 +52,7 @@ class AdService extends Service {
       include: [{
         model: this.ctx.model.Hr,
         as: 'hr',
-        attributes: [ 'id', 'username' ],
+        attributes: [ 'id', 'username', 'avatar' ],
       }],
     });
     if (!ad) {
