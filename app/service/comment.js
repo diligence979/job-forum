@@ -9,7 +9,7 @@ const {
 class CommentService extends Service {
   async index({
     offset = 0,
-    limit = 10,
+    limit = 30,
     order_by = 'created_at',
     order = 'DESC',
     post_id = null,
