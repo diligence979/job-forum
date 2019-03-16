@@ -2,11 +2,11 @@
 
 module.exports = app => {
   const { router } = app;
-  router.post('/api/hr', 'hr.create');
-  router.delete('/api/hr/:id', 'hr.destroy');
-  router.put('/api/hr/:id', 'hr.update');
-  router.post('/api/hr/login', 'hr.login');
-  router.get('/api/hr/:id', 'hr.find');
-  router.get('/api/hr/:id/edit', 'hr.find');
-  router.post('/api/hr/avatar', 'hr.avatar')
+  router.post('/api/hrs', 'hr.create');
+  router.delete('/api/hrs/:id', 'hr.destroy');
+  router.put('/api/hrs/:id', 'hr.update');
+  router.post('/api/hrs/login', 'hr.login');
+  router.get('/api/hrs/:id', 'hr.find');
+  router.get('/api/hrs/:id/edit', 'hr.find');
+  router.post('/api/hrs/avatar', 'hr.avatar')
 };

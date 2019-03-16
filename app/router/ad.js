@@ -2,12 +2,12 @@
 
 module.exports = app => {
   const { router } = app;
-  router.get('/api/ad', 'ad.index');
-  router.post('/api/ad', 'ad.create');
-  router.get('/api/ad/:id', 'ad.find');
-  router.get('/api/ad/hr/:id', 'ad.findByHr')
-  router.get('/api/ad/:id/edit', 'ad.edit');
-  router.delete('/api/hrs/:hr_id/ad/:id', 'ad.destroy');
-  router.put('/api/hrs/:hr_id/ad/:id', 'ad.update');
-  router.get('/api/comment/ad', 'ad.hot');
+  router.get('/api/ads', 'ad.index');
+  router.post('/api/ads', 'ad.create');
+  router.get('/api/ads/:id', 'ad.find');
+  router.get('/api/hrs/:id/ads', 'ad.findByHr')
+  router.get('/api/ads/:id/edit', 'ad.edit');
+  router.delete('/api/hrs/:hr_id/ads/:id', 'ad.destroy');
+  router.put('/api/hrs/:hr_id/ads/:id', 'ad.update');
+  router.get('/api/comments/ads', 'ad.hot');
 };
